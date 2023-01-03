@@ -8,6 +8,7 @@ const Expenses = (props) => {
     const [selectedYear, setSelectedYear] = useState('2023');
 
     const expensesFilterChangeHandler = (yearFilter) => {
+        console.log(yearFilter)
         setSelectedYear(yearFilter)
         console.log(selectedYear)
     }
@@ -15,9 +16,18 @@ const Expenses = (props) => {
 
     return (
         <Card className='expenses'>
-            <ExpensesFilter selected={selectedYear} onExpensesFilterChange={expensesFilterChangeHandler} />
+            <ExpensesFilter 
+            selected={selectedYear} 
+            onExpensesFilterChange={expensesFilterChangeHandler} />
+
             {props.items.map(expense =>{
-                return (<ExpenseItem title={expense.title} amount={expense.amount} date={expense.date}/>)
+                return (
+                <ExpenseItem 
+                    key={expense.id}
+                    title={expense.title} 
+                    amount={expense.amount} 
+                    date={expense.date}
+                />)
             })}
         </Card>
     );
