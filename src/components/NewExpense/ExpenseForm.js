@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './ExpenseForm.css'
 
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
     // We save enteredTitle so that no matter if we rerun the module the vakue is stored
     // useState('') because we don´t wanna save anyting at the beggining.
     const [enteredTitle, setEnteredTitle] = useState('');
@@ -25,7 +25,8 @@ const ExpenseForm = () => {
             amount: enteredAmount,
             date: new Date (enteredDate)
         }
-        console.log(expenseData);
+        props.onSaveExpenseData(expenseData)
+        
         setEnteredTitle('');
         setEnteredAmount('');
         setEnteredDate('');

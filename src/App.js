@@ -3,11 +3,13 @@ import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 const App = () => {
+  const saveNewExpenseHandler = expenseData =>{
+    console.log(expenseData)
+  }
   
   return (
     <div>
-      <h2>Let's get started!</h2>
-      <NewExpense/>
+      <NewExpense onSaveNewExpense = {saveNewExpenseHandler}/>
       <Expenses/>
       
     </div>
