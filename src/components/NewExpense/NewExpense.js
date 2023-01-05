@@ -1,5 +1,6 @@
 import './NewExpense.css'
 import ExpenseForm from './ExpenseForm';
+import { useState } from 'react';
 
 const NewExpense = (props) => {
     const saveExpenseDataHandler = (enteredExpenseData) => {
@@ -8,15 +9,24 @@ const NewExpense = (props) => {
             id: Math.random().toString()
         }
         props.onSaveNewExpense(expenseData);
+        stopEditHandler()
     }
+    
+    const [isEditing, setIsEditing] = useState(false);
+
+    const editHandler = () => {
+        setIsEditing(true);
+    }
+    const stopEditHandler = () => {
+        setIsEditing(false);
+    }
+
     return (
         <div className='new-expense'>
-            {/* we call this prop onBLaBlaBla bc we will pass a function as parameter
-            we will use it to perfrom child to parnt communication (bottom-up) */}
-            <ExpenseForm onSaveExpenseData ={saveExpenseDataHandler} />
-            {/* we just passed a pointer at a function  */}
-                
             
+            {!isEditing && <button onClick={editHandler}>Add new expense</button>}
+            {isEditing && <ExpenseForm onSaveExpenseData ={saveExpenseDataHandler} onCloseTab = {stopEditHandler}/>}
+           
         </div>
     );
 
